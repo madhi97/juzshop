@@ -57,11 +57,11 @@ public void insertcart(CartModel cart){
 
     if(qrystatus>0){
         for ( Map.Entry<Integer,Integer> entry :  cart.getProduct_list().entrySet()) {
-            template.update("Insert into juzshop.cart_dtl (cart_id,product_id,quantity,item_amount) values (:cart_id,:product_id,:quantity,(select selling_price from juzshop.products where product_id = :product_id));"
+            template.update("Insert into juzshop.cart_dtl (cart_id,product_id,quantity,item_amount) values (:cart_id,:product_id,:quantity,(select ( selling_price * :quantity ) from juzshop.products where product_id = :product_id));"
             ,new MapSqlParameterSource()
             .addValue("cart_id", holder.getKey())
             .addValue("product_id", entry.getKey())
-            .addValue("product_id", entry.getValue())
+            .addValue("quantity", entry.getValue())
             );
         }
     }
@@ -71,7 +71,7 @@ public void insertcart(CartModel cart){
 }
 
 @Override
-public void updatecart(CartModel cart){
+public void updatecartsummary(CartModel cart){
     
     template.update("update juzshop.cart_hdr set user_id = :user_id , item_count = :item_count, cart_amount= :cart_amount, status:status  where cart_id = :cart_id;",
     new MapSqlParameterSource()
@@ -80,7 +80,22 @@ public void updatecart(CartModel cart){
         .addValue("cart_amount",cart.getCartamount())
         .addValue("status",cart.getStatus())
         .addValue("cart_id", cart.getCartid())  );
+
+    
     
 }
+
+@Override
+public void updatecartproducts(int cart_id,HashMap<Integer,Integer> productlist){
+
+    for ( Map.Entry<Integer,Integer> entry :  productlist.entrySet()) {
+        template.update("update cart_dtl set quantity = :quantity , item_amount = (select ( selling_price * :quantity ) from juzshop.products where product_id = :product_id) where cart_id = :cart_id and and product_id = :product_id;",
+        new MapSqlParameterSource()
+        .addValue("product_id", entry.getKey())
+        .addValue("quantity", entry.getValue())
+        );
+    }
+}
+
 
 }
