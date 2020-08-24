@@ -1,20 +1,20 @@
 package com.ecommerce.juzshop.model;
 
-
-public class ProductModel{
+public class ProductModel {
 
     private int product_id;
     private String product_name;
     private int selling_price;
     private int mrp;
     private int disc_perc;
-    private String supplier_name;   
+    private String supplier_name;
     private int stock;
 
     public ProductModel() {
     }
 
-    public ProductModel(int product_id, String product_name, int selling_price, int mrp, int disc_perc, String supplier_name, int stock) {
+    public ProductModel(int product_id, String product_name, int selling_price, int mrp, int disc_perc,
+            String supplier_name, int stock) {
         this.product_id = product_id;
         this.product_name = product_name;
         this.selling_price = selling_price;
@@ -24,7 +24,6 @@ public class ProductModel{
         this.stock = stock;
     }
 
-   
     public int getProduct_id() {
         return this.product_id;
     }
@@ -83,16 +82,10 @@ public class ProductModel{
 
     @Override
     public String toString() {
-        return "{" +
-            " product_id='" + getProduct_id() + "'" +
-            ", product_name='" + getProduct_name() + "'" +
-            ", selling_price='" + getSelling_price() + "'" +
-            ", mrp='" + getMrp() + "'" +
-            ", disc_perc='" + getDisc_perc() + "'" +
-            ", supplier_name='" + getSupplier_name() + "'" +
-            ", stock='" + getStock() + "'" +
-            "}";
+        return "{" + " product_id='" + getProduct_id() + "'" + ", product_name='" + getProduct_name() + "'"
+                + ", selling_price='" + getSelling_price() + "'" + ", mrp='" + getMrp() + "'" + ", disc_perc='"
+                + getDisc_perc() + "'" + ", supplier_name='" + getSupplier_name() + "'" + ", stock='" + getStock() + "'"
+                + "}";
     }
 
-   
 }

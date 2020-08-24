@@ -1,17 +1,25 @@
 package com.ecommerce.juzshop.model;
+
 import java.util.*;
 
-public class CartModel{
+public class CartModel {
     private int cartid;
     private int userid;
     private int itemcount;
     private int cartamount;
     private String status;
-    private Map<Integer,Integer> product_list;
-
-   
+    private Map<Integer, Integer> product_list;
 
     public CartModel() {
+    }
+
+    public CartModel(int userid, int itemcount, int cartamount, String status, Map<Integer, Integer> product_list) {
+
+        this.userid = userid;
+        this.itemcount = itemcount;
+        this.cartamount = cartamount;
+        this.status = status;
+        this.product_list = product_list;
     }
 
     public int getCartid() {
@@ -54,28 +62,19 @@ public class CartModel{
         this.status = status;
     }
 
-    public Map<Integer,Integer> getProduct_list() {
+    public Map<Integer, Integer> getProduct_list() {
         return this.product_list;
     }
 
-    public void setProduct_list(Map<Integer,Integer> product_list) {
+    public void setProduct_list(Map<Integer, Integer> product_list) {
         this.product_list = product_list;
     }
 
-
     @Override
     public String toString() {
-        return "{" +
-            " cartid='" + getCartid() + "'" +
-            ", userid='" + getUserid() + "'" +
-            ", itemcount='" + getItemcount() + "'" +
-            ", cartamount='" + getCartamount() + "'" +
-            ", status='" + getStatus() + "'" +
-            ", product_list='" + getProduct_list() + "'" +
-            "}";
+        return "{" + " cartid='" + getCartid() + "'" + ", userid='" + getUserid() + "'" + ", itemcount='"
+                + getItemcount() + "'" + ", cartamount='" + getCartamount() + "'" + ", status='" + getStatus() + "'"
+                + ", product_list='" + getProduct_list() + "'" + "}";
     }
-
-   
-
 
 }
