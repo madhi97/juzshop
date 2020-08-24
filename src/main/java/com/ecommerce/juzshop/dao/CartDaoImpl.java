@@ -12,17 +12,18 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 
 @Repository
-public class CartDaoImpl implements CartDao {
+public class CartDaoImpl implements CartDao   {
     @Autowired
     NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    public void setNamedParameterJdbcTemplate(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+    public void setNamedParameterJdbcTemplate(NamedParameterJdbcTemplate namedParameterJdbcTemplate) throws DataAccessException {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 
-    public CartDaoImpl() {
+    public CartDaoImpl() throws DataAccessException {
     }
 
     @Override
@@ -72,7 +73,7 @@ public class CartDaoImpl implements CartDao {
     public void updatecartsummary(CartModel cart) {
 
         namedParameterJdbcTemplate.update(
-                "update juzshop.cart_hdr set user_id = :user_id , item_count = :item_count, cart_amount= :cart_amount, status:status  where cart_id = :cart_id;",
+                "update juzshop.cart_hdr set user_id = :user_id , item_count = :item_count, cart_amount= :cart_amount, cart_status = :status  where cart_id = :cart_id;",
                 new MapSqlParameterSource().addValue("user_id", cart.getUserid())
                         .addValue("item_count", cart.getItemcount()).addValue("cart_amount", cart.getCartamount())
                         .addValue("status", cart.getStatus()).addValue("cart_id", cart.getCartid()));
