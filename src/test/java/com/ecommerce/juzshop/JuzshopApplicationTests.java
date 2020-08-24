@@ -1,6 +1,7 @@
 package com.ecommerce.juzshop;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.ecommerce.juzshop.dao.CartDaoImpl;
@@ -32,6 +33,8 @@ class JuzshopApplicationTests {
 		NamedParameterJdbcTemplate namedParameterJdbcTemplate = ctx.getBean(NamedParameterJdbcTemplate.class);
 		cartinsert.setNamedParameterJdbcTemplate(namedParameterJdbcTemplate);
 		cartinsert.insertcart(cart);
+		List<CartModel> cartlist = cartinsert.getallcartsummary();
+		System.out.println(cartlist.toString());
 		ctx.close();
 	}
 
