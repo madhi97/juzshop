@@ -15,11 +15,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 
 @Repository
-public class CartDaoImpl implements CartDao   {
+public class CartDaoImpl implements CartDao {
     @Autowired
     NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    public void setNamedParameterJdbcTemplate(NamedParameterJdbcTemplate namedParameterJdbcTemplate) throws DataAccessException {
+    public void setNamedParameterJdbcTemplate(NamedParameterJdbcTemplate namedParameterJdbcTemplate)
+            throws DataAccessException {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 
@@ -49,6 +50,18 @@ public class CartDaoImpl implements CartDao   {
     }
 
     @Override
+    public void additemtocart(int cart_id, HashMap<Integer, Integer> product_list) {
+
+        for (Map.Entry<Integer, Integer> entry : product_list.entrySet()) {
+            namedParameterJdbcTemplate.update(
+                    "Insert into juzshop.cart_dtl (cart_id,product_id,quantity,item_amount) values (:cart_id,:product_id,:quantity,(select ( selling_price * :quantity ) from juzshop.products where product_id = :product_id));",
+                    new MapSqlParameterSource().addValue("cart_id", cart_id).addValue("product_id", entry.getKey())
+                            .addValue("quantity", entry.getValue()));
+        }
+
+    }
+
+    @Override
     public void insertcart(CartModel cart) {
         KeyHolder holder = new GeneratedKeyHolder();
         int qrystatus = namedParameterJdbcTemplate.update(
@@ -59,14 +72,8 @@ public class CartDaoImpl implements CartDao   {
                 holder, new String[] { "cart_id" });
 
         if (qrystatus > 0) {
-            for (Map.Entry<Integer, Integer> entry : cart.getProduct_list().entrySet()) {
-                namedParameterJdbcTemplate.update(
-                        "Insert into juzshop.cart_dtl (cart_id,product_id,quantity,item_amount) values (:cart_id,:product_id,:quantity,(select ( selling_price * :quantity ) from juzshop.products where product_id = :product_id));",
-                        new MapSqlParameterSource().addValue("cart_id", holder.getKey())
-                                .addValue("product_id", entry.getKey()).addValue("quantity", entry.getValue()));
-            }
+            additemtocart((int) holder.getKey(), cart.getProduct_list());
         }
-
     }
 
     @Override
@@ -81,9 +88,9 @@ public class CartDaoImpl implements CartDao   {
     }
 
     @Override
-    public void updatecartproducts(int cart_id, HashMap<Integer, Integer> productlist) {
+    public void updatecartproducts(int cart_id, HashMap<Integer, Integer> product_list) {
 
-        for (Map.Entry<Integer, Integer> entry : productlist.entrySet()) {
+        for (Map.Entry<Integer, Integer> entry : product_list.entrySet()) {
             namedParameterJdbcTemplate.update(
                     "update cart_dtl set quantity = :quantity , item_amount = (select ( selling_price * :quantity ) from juzshop.products where product_id = :product_id) where cart_id = :cart_id and and product_id = :product_id;",
                     new MapSqlParameterSource().addValue("product_id", entry.getKey()).addValue("quantity",
@@ -95,16 +102,26 @@ public class CartDaoImpl implements CartDao   {
     public List<Map<String, Object>> getcartitems(int cart_id) {
 
         return namedParameterJdbcTemplate.queryForList(
-                "select product_id , quantity from cart_dtl where cart_id = :cart_id ",
+                "select product_id , quantity from juzshop.cart_dtl where cart_id = :cart_id ",
                 new MapSqlParameterSource().addValue("cart_id", cart_id));
 
     }
-    /*
-     * @Override public void additemtocart(int cart_id, HashMap<Integer,Integer>
-     * itemlist) {
-     * 
-     * 
-     * }
-     */
+
+    @Override
+    public void deletecartitem(int cart_id, int product_id) {
+
+        namedParameterJdbcTemplate.update(
+                "delete from juzshop.cart_dtl where cart_id = :cart_id and product_id = :product_id;",
+                new MapSqlParameterSource().addValue("cart_id", cart_id).addValue("product_id", product_id));
+
+    }
+
+    @Override
+    public void deletecart(int cart_id) {
+
+        namedParameterJdbcTemplate.update("delete from juzshop.cart_hdr where cart_id = :cart_id;",
+                new MapSqlParameterSource().addValue("cart_id", cart_id));
+
+    }
 
 }
