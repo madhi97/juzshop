@@ -1,5 +1,7 @@
 package com.ecommerce.juzshop.controller;
 
+import java.util.List;
+
 import com.ecommerce.juzshop.model.CartModel;
 import com.ecommerce.juzshop.service.CartService;
 
@@ -18,6 +20,13 @@ public class CartController {
 
         return cartService.getbyId(cart_id);
 
+    }
+
+    @GetMapping("/cart/getAll")
+    public List<CartModel> cartgetall(){
+        return cartService.getall();
+
+        
     }
 
 }
