@@ -27,7 +27,7 @@ public class AppConfig {
     @Bean
     public NamedParameterJdbcTemplate namedParameterJdbcTemplate(DriverManagerDataSource db) {
         if (db == null) {
-            System.out.println("Null!!!!!!!!!!!!!!!!!!!!!!!! /n");
+            System.out.println("/n Null!!!!!!!!!!!!!!!!!!!!!!!! /n");
         }
         return new NamedParameterJdbcTemplate(db);
     }
