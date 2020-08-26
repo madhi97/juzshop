@@ -17,11 +17,14 @@ public interface CartDao {
 
     void updatecartsummary(CartModel cart);
 
-    void updatecartproducts(int cart_id, HashMap<Integer, Integer> productlist);
+    void updatecartproducts(int cart_id, HashMap<Integer, Integer> product_list);
 
     List<Map<String, Object>> getcartitems(int cart_id);
-    // void additemtocart(int cart_id, HashMap<Integer,Integer> itemlist);
-    // void changeitemqty(int cart_id, int product_id, int qty);
-    // void deletecartitem(int cart_id,int product_id);
+
+    void additemtocart(int cart_id, HashMap<Integer, Integer> product_list);
+
+    void deletecartitem(int cart_id, int product_id);
+
+    void deletecart(int cart_id);
 
 }
