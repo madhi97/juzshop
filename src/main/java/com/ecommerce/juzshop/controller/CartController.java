@@ -24,9 +24,14 @@ public class CartController {
 
     @GetMapping("/cart/getAll")
     public List<CartModel> cartgetall(){
-        return cartService.getall();
+        return cartService.getall();        
+    }
 
-        
+    @GetMapping("cart/getbyuser/{user_id}")
+    public List<CartModel> cartgetbyUser(@PathVariable("user_id") int user_id){
+
+        return cartService.getbyUser(user_id);
+
     }
 
 }
