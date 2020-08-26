@@ -8,12 +8,12 @@ public class CartModel {
     private int itemcount;
     private int cartamount;
     private String status;
-    private Map<Integer, Integer> product_list;
+    private HashMap<Integer, Integer> product_list;
 
     public CartModel() {
     }
 
-    public CartModel(int userid, int itemcount, int cartamount, String status, Map<Integer, Integer> product_list) {
+    public CartModel(int userid, int itemcount, int cartamount, String status, HashMap<Integer, Integer> product_list) {
 
         this.userid = userid;
         this.itemcount = itemcount;
@@ -62,11 +62,11 @@ public class CartModel {
         this.status = status;
     }
 
-    public Map<Integer, Integer> getProduct_list() {
+    public HashMap<Integer, Integer> getProduct_list() {
         return this.product_list;
     }
 
-    public void setProduct_list(Map<Integer, Integer> product_list) {
+    public void setProduct_list(HashMap<Integer, Integer> product_list) {
         this.product_list = product_list;
     }
 
