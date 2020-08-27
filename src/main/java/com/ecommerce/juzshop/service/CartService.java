@@ -51,5 +51,20 @@ public class CartService {
         return allcart;
 
     }
+    public void insertcart(CartModel cart){
+        cartdao.insertcart(cart);
+    }
+
+    public void updatecart(CartModel cart){
+        cartdao.updatecartsummary(cart);
+        cartdao.updatecartproducts(cart.getCartid(), cart.getProduct_list());
+    }
+    public void deletecart(int cart_id){
+        cartdao.deletecart(cart_id);
+    }
+    public void removeitems(int cart_id,int  product_id){
+        cartdao.deletecartitem(cart_id, product_id);
+
+    }
 
 }
