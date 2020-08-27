@@ -26,32 +26,36 @@ public class CartController {
     }
 
     @GetMapping("/cart/getAll")
-    public List<CartModel> cartgetall(){
-        return cartService.getall();        
+    public List<CartModel> cartgetall() {
+        return cartService.getall();
     }
 
     @GetMapping("/cart/getbyuser/{user_id}")
-    public List<CartModel> cartgetbyUser(@PathVariable("user_id") int user_id){
+    public List<CartModel> cartgetbyUser(@PathVariable("user_id") int user_id) {
 
         return cartService.getbyUser(user_id);
 
     }
+
     @PostMapping("/cart/insert")
-    public void cartinsert(@RequestBody CartModel cart){     
-        cartService.insertcart(cart);   
-        
+    public void cartinsert(@RequestBody CartModel cart) {
+        cartService.insertcart(cart);
+
     }
+
     @PostMapping("/cart/update")
-    public void cartupdate(@RequestBody CartModel cart){
-        cartService.updatecart(cart);        
+    public void cartupdate(@RequestBody CartModel cart) {
+        cartService.updatecart(cart);
     }
+
     @DeleteMapping("/cart/delete/{cart_id}")
-    public void cartdelete(@PathVariable int cart_id ){
+    public void cartdelete(@PathVariable int cart_id) {
         cartService.deletecart(cart_id);
 
     }
+
     @DeleteMapping("/cart/delete/{cart_id}/{product_id}")
-    public void removeitem(@PathVariable int cart_id,@PathVariable int product_id){
+    public void removeitem(@PathVariable int cart_id, @PathVariable int product_id) {
         cartService.removeitems(cart_id, product_id);
     }
 

@@ -41,7 +41,7 @@ public class CartService {
         return allcart;
     }
 
-    public List<CartModel> getbyUser(int user_id){
+    public List<CartModel> getbyUser(int user_id) {
         List<CartModel> tempcartlist = cartdao.getcartsummarybyuser(user_id);
         List<CartModel> allcart = new ArrayList<CartModel>();
 
@@ -51,18 +51,21 @@ public class CartService {
         return allcart;
 
     }
-    public void insertcart(CartModel cart){
+
+    public void insertcart(CartModel cart) {
         cartdao.insertcart(cart);
     }
 
-    public void updatecart(CartModel cart){
+    public void updatecart(CartModel cart) {
         cartdao.updatecartsummary(cart);
         cartdao.updatecartproducts(cart.getCartid(), cart.getProduct_list());
     }
-    public void deletecart(int cart_id){
+
+    public void deletecart(int cart_id) {
         cartdao.deletecart(cart_id);
     }
-    public void removeitems(int cart_id,int  product_id){
+
+    public void removeitems(int cart_id, int product_id) {
         cartdao.deletecartitem(cart_id, product_id);
 
     }
