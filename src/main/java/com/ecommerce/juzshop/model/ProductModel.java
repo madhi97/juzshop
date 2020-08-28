@@ -13,9 +13,9 @@ public class ProductModel {
     public ProductModel() {
     }
 
-    public ProductModel(int product_id, String product_name, int selling_price, int mrp, int disc_perc,
+    public ProductModel( String product_name, int selling_price, int mrp, int disc_perc,
             String supplier_name, int stock) {
-        this.product_id = product_id;
+        
         this.product_name = product_name;
         this.selling_price = selling_price;
         this.mrp = mrp;
