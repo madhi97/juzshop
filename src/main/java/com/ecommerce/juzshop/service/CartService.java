@@ -70,4 +70,9 @@ public class CartService {
 
     }
 
+    public void convertcart(int cart_id){
+        cartdao.convertorder(cart_id);
+
+    }
+
 }

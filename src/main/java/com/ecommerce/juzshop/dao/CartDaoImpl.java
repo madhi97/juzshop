@@ -124,4 +124,14 @@ public class CartDaoImpl implements CartDao {
 
     }
 
+    @Override
+    public void convertorder(int cart_id){
+        namedParameterJdbcTemplate.update(
+            "update juzshop.cart_hdr set status = 'C'  where cart_id = :cart_id;",
+            new MapSqlParameterSource().addValue("cart_id", cart_id));
+
+    }
+
+    
+
 }

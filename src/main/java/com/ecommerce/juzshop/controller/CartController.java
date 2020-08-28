@@ -59,4 +59,9 @@ public class CartController {
         cartService.removeitems(cart_id, product_id);
     }
 
+    @PostMapping("/cart/convertorder/{cart_id}")
+    public void convertorder(@PathVariable int cart_id){
+        cartService.convertcart(cart_id);
+    }
+
 }

@@ -27,4 +27,6 @@ public interface CartDao {
 
     void deletecart(int cart_id);
 
+    void convertorder(int cart_id);
+
 }
