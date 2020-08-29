@@ -10,7 +10,7 @@ public class JuzshopApplication {
 	public static void main(String[] args) {
 
 		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
-		ctx.register(AppConfig.class);
+		ctx.register(AppConfig.class,WebSecurityConfig.class);
 		ctx.refresh();
 		SpringApplication.run(JuzshopApplication.class, args);
 		ctx.close();
