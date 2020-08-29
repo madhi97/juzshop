@@ -40,3 +40,12 @@ create table IF NOT EXISTS juzshop.employee (
     email_id VARCHAR,
     DOB varchar
 );
+
+
+create table IF NOT EXISTS juzshop.users (
+    user_id SERIAL PRIMARY KEY,
+    user_name varchar,
+    user_role VARCHAR,
+    pwd VARCHAR
+    
+);
