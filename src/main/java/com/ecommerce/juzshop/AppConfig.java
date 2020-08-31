@@ -10,12 +10,13 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 @Configuration
 
 public class AppConfig {
+
     DriverManagerDataSource db;
 
     @Bean
     public DataSource getDataSource() {
-        db = new DriverManagerDataSource();
 
+        db = new DriverManagerDataSource();
         db.setDriverClassName("org.postgresql.Driver");
         db.setUrl("jdbc:postgresql://localhost:5432/juzshop");
         db.setUsername("system");
@@ -26,10 +27,9 @@ public class AppConfig {
 
     @Bean
     public NamedParameterJdbcTemplate namedParameterJdbcTemplate(DriverManagerDataSource db) {
-        if (db == null) {
-            System.out.println("/n Null!!!!!!!!!!!!!!!!!!!!!!!! /n");
-        }
+
         return new NamedParameterJdbcTemplate(db);
+
     }
 
 }
