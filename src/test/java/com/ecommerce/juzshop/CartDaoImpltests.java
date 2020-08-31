@@ -19,7 +19,7 @@ public class CartDaoImpltests {
     @Test
 	void testinsertcartdetails() {
 		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
-		ctx.register(AppConfig.class);
+		ctx.register(AppConfig.class,WebSecurityConfig.class);
 		ctx.refresh();
 
 		HashMap<Integer, Integer> productlist = new HashMap<Integer, Integer>();

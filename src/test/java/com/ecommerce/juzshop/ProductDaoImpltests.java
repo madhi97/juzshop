@@ -14,7 +14,7 @@ public class ProductDaoImpltests {
     @Test
 	void testinsertproductdetails() {
 		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
-		ctx.register(AppConfig.class);
+		ctx.register(AppConfig.class,WebSecurityConfig.class);
 		ctx.refresh();
 
         ProductModel product = new ProductModel("test prod",10,20,5,"supplier",5);
