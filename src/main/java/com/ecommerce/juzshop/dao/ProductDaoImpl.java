@@ -19,7 +19,7 @@ public class ProductDaoImpl implements ProductDao {
     NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     public void setNamedParameterJdbcTemplate(NamedParameterJdbcTemplate namedParameterJdbcTemplate)
-            throws DataAccessException {
+            {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 

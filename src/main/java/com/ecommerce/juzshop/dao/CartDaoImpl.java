@@ -12,7 +12,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
+
 
 @Repository
 public class CartDaoImpl implements CartDao {
@@ -20,12 +20,11 @@ public class CartDaoImpl implements CartDao {
     NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     public void setNamedParameterJdbcTemplate(NamedParameterJdbcTemplate namedParameterJdbcTemplate)
-            throws DataAccessException {
+            {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 
-    public CartDaoImpl() throws DataAccessException {
-    }
+    
 
     @Override
     public List<CartModel> getallcartsummary() {
